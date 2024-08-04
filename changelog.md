@@ -1,4 +1,7 @@
 
+## <cy>v1.4.3</c> (2024-08-04)
+- stopped the twerking (I'm tired)
+
 ## <cy>v1.4.2</c> (2024-08-04)
 - twerked to catgirls way too much (they're very hot)
 
