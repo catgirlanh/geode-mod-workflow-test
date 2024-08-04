@@ -28,9 +28,9 @@ jobs:
         id: update_changelog
         run: |
           CHANGELOG=$(git log -1 --pretty=%B | sed '1d;$d') >> $GITHUB_ENV
-          FORMATTED_VERSION="## <cy>$VERSION_INPUT</c>"
+          FORMATTED_VERSION="## <cy>$VERSION_INPUT</c>" ({{ github.event.head_commit.timestamp }})
           echo -e "\n$FORMATTED_VERSION$CHANGELOG" > tmp.md
-          echo ./changelog.md >> tmp.md
+          cat ./changelog.md >> tmp.md
           mv tmp.md changelog.md
           echo Successfully appended:
           echo - Version: $VERSION_INPUT
