@@ -27,7 +27,7 @@ jobs:
       - name: Update changelog and bump version
         id: update_changelog
         run: |
-          RAW_CHANGELOG=$(echo "${{ github.event.head_commit.message }}" | tr '\n' '\\n')
+          RAW_CHANGELOG=$(echo "${{ github.event.head_commit.message }}" | sed ':a;N;$!ba;s/\n/\\n/g')
           echo "$RAW_CHANGELOG"
           CHANGELOG=$(echo -e "$RAW_CHANGELOG" | sed '1d;2d')
           FORMATTED_DATE=$(date -d "${{ github.event.head_commit.timestamp }}" '+%Y-%m-%d') 
