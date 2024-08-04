@@ -32,7 +32,7 @@ jobs:
           CHANGELOG=$(echo -e "$RAW_CHANGELOG" | sed '1d;2d')
           FORMATTED_DATE=$(date -d "${{ github.event.head_commit.timestamp }}" '+%Y-%m-%d') 
           FORMATTED_VERSION="## <cy>$VERSION_INPUT</c> ($FORMATTED_DATE)"
-          echo -e "\n$FORMATTED_VERSION$CHANGELOG" > tmp.md
+          echo -e "\n$FORMATTED_VERSION\n$CHANGELOG" > tmp.md
           cat ./changelog.md >> tmp.md
           mv tmp.md changelog.md
           echo Successfully appended:
