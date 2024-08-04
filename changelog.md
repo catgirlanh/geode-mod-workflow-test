@@ -1,4 +1,6 @@
 
+## <cy>v1.2.4</c> (2024-08-04)
+
 ## <cy>v1.0.3</c> (2024-08-04T23:25:55+07:00)
 
 ## <cy>v1.0.2</c> ({{ github.event.head_commit.timestamp }})
