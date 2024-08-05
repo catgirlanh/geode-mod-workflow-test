@@ -1,4 +1,7 @@
 
+## <cy>v1.6.0</c> (2024-08-05)
+go go build machine!!!
+
 ## <cy>v1.5.1</c> (2024-08-05)
 equipped thigh highs
 
