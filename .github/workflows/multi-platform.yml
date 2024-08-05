@@ -81,9 +81,11 @@ jobs:
 
     steps:
       - name: Checkout
-      #  uses: actions/checkout@v4
-      #  with:
-      #    fetch-depth: 0
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Catch up
         # see https://github.com/actions/checkout/issues/439
         run: git pull origin main --no-rebase
 
