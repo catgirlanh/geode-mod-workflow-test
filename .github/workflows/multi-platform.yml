@@ -84,6 +84,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+        # see https://github.com/actions/checkout/issues/439
+        run: git pull origin main --no-rebase
 
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
