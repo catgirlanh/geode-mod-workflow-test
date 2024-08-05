@@ -29,7 +29,7 @@ class $modify(MenuLayer) {
         });
 
 // logic for starting the request
-        auto req = web::WebRequest(); m_fields->m_listener.setFilter(req.get("https://pastebin.com/raw/vNi1WHNF"));
+        auto req = web::WebRequest(); m_fields->m_listener.setFilter(req.get("https://nekos.best/api/v2/neko"));
         return true;
     }
 };
