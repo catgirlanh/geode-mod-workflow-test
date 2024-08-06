@@ -1,7 +1,5 @@
 # Anh's Workflow Test
 
-No, this won't be on the real Geode workflow file. Very specific use case.
-
 > [!WARNING]  
 > For the changelog and version appender feature to work, you MUST go to `Settings` > `Actions` > `General`, find `Workflow Permissions` and check `Read and write permissions`. The ability to use your own GitHub authentication token will be available in the future.
 
