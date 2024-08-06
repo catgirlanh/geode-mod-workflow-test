@@ -23,9 +23,9 @@ jobs:
         run: |
           echo "VERSION_INPUT=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
           if [[ $VERSION_INPUT =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo Version $VERSION_INPUT is valid.
+            echo "Version $VERSION_INPUT is valid."
           else
-            echo Version $VERSION_INPUT doesn't seem to be invalid. Goodbye!
+            echo "Version $VERSION_INPUT doesn't seem to be invalid. Goodbye!"
             exit 1
           fi
 
