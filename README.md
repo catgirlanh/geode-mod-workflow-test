@@ -5,7 +5,7 @@ Features:
 - [x] Conditional activation
   - [ ] Additional check for special cases (e.g. "very special update")
 - [x] Automatic changelog appender
-  - [ ] Also do the same to the release page (This is very hard)
+  - [ ] Also do the same to the release page (This is very hard, as variables are isolated between jobs)
 - [x] Automatic mod version bumper
   - [ ] Check to prevent the workflow from continuing upon detecting duplicate version
 - [x] Automatic release creator
