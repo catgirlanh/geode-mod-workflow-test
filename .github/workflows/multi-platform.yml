@@ -7,13 +7,19 @@ on:
       # To freely commit on other branches without publishing the mod
 
 jobs:
-  magic-touches:
-    # must strictly conform to the "v4.2.0" format, else everything will break
-    if: startsWith(github.event.head_commit.message, 'v')
-    name: Modify mod files
+  initial-checks:
+    name: Initial checks
     runs-on: ubuntu-latest
+    # why lol
+    if: startsWith(github.event.head_commit.message, 'v')
     steps:
-      - name: Initial Checks
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Fetch all tags
+        run: git fetch --tags  # why
+        
+      - name: Initial version check
         run: |
           echo "VERSION_INPUT=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
           if [[ $VERSION_INPUT =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
@@ -22,15 +28,24 @@ jobs:
             echo Version seems to be invalid. Goodbye!
             exit 1
           fi
+
+      - name: Secondary version check
+        run: |
+          if "$(git tag)" | grep -q "$VERSION_INPUT"; then
+            echo "The version you're trying to release ($VERSION_INPUT) already have existed! Make sure you know what you're doing!"
+            exit 1
+          else
+            echo "All good! :3"
+          fi
+          
+  magic-touches:
+    needs: [initial-checks]
+    name: Modify mod files
+    runs-on: ubuntu-latest
+    steps:
+          
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Get version
-        id: get_version_input
-        run: |
-        
-          echo "value=$VERSION_INPUT" >> $GITHUB_OUTPUT
-          echo version returned "$VERSION_INPUT".
           
       - name: Update changelog and bump version
         id: update_changelog
@@ -38,16 +53,20 @@ jobs:
           RAW_CHANGELOG=$(echo "${{ github.event.head_commit.message }}" | sed ':a;N;$!ba;s/\n/\\n/g')
           echo "$RAW_CHANGELOG"
           CHANGELOG=$(echo -e "$RAW_CHANGELOG" | sed '1d;2d')
-          FORMATTED_DATE=$(date -d "${{ github.event.head_commit.timestamp }}" '+%Y-%m-%d') 
-          FORMATTED_VERSION="## <cy>$VERSION_INPUT</c> ($FORMATTED_DATE)"
-          echo -e "\n$FORMATTED_VERSION\n$CHANGELOG" > tmp.md
-          cat ./changelog.md >> tmp.md
-          mv tmp.md changelog.md
-          echo Successfully appended:
-          echo - Version: $VERSION_INPUT
-          echo - Changelog: "|"
-          echo $CHANGELOG
-          echo ---
+          if [ -z "$CHANGELOG}" ]; then
+            echo "Changelog not provided. Skipping."
+          else
+            FORMATTED_DATE=$(date -d "${{ github.event.head_commit.timestamp }}" '+%Y-%m-%d') 
+            FORMATTED_VERSION="## <cy>$VERSION_INPUT</c> ($FORMATTED_DATE)"
+            echo -e "\n$FORMATTED_VERSION\n$CHANGELOG" > tmp.md
+            cat ./changelog.md >> tmp.md
+            mv tmp.md changelog.md
+            echo Successfully appended:
+            echo - Version: $VERSION_INPUT
+            echo - Changelog: "|"
+            echo $CHANGELOG
+            echo ---
+          fi
           jq --arg new_version "${VERSION_INPUT#v}" '.version = $new_version' mod.json > tmp.json && mv tmp.json mod.json
           
       - name: Stage and commit changes
@@ -124,33 +143,51 @@ jobs:
       - uses: actions/download-artifact@v4
         name: Download artifact
       
-      - name: Check for mod file
+      - name: Misc. actions
         run: |
           cd "Build Output/"
           MOD_FILE=$(find . -name '*.geode' -print -quit)
           echo mod file path: $MOD_FILE
           if [ -f "$MOD_FILE" ]; then
-             echo Mod file found. Proceeding
+             echo Mod file found. Proceeding!
+             unzip $MOD_FILE
+             # being VERY SURE here
+             CHANGELOG_FILE=$(find . -iname "changelog.md" -print -quit)
+          
+            # Extract changelog entries using awk
+            awk -v version="$VERSION_INPUT" '
+            /^## <cy>/ {
+              if (match($0, version)) {
+                uwu = 1;
+              } else if (inside) {
+                uwu = 0;
+                exit;
+              }
+            }
+            uwu { print $0; }  # Print only if we are inside the target block
+            ' "$CHANGELOG_FILE" > $RAW_LATEST_CHANGELOG
           else
              echo "No mod file! Something went wrong... :("
              exit 1
           fi
 
       - name: Prepare for release
-        id: vars
         run: |
+          LATEST_CHANGELOG=$(echo "$RAW_LATEST_CHANGELOG" | sed ':a;N;$!ba;s/\n/\\n/g')
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           MOD_VER=$(echo "${{ github.event.head_commit.message }}" | sed -n '1p') >> $GITHUB_ENV
           echo publishing mod ver: ${MOD_VER}
           REPO=${{ github.repository }}
           RELEASE_NAME="Release ${MOD_VER}"
-          BODY="This is an automated release. For the changelogs, see the \`changelog.md\` file."
+          BODY="$(echo -e "This is an automated release. For the full changelogs of current and past versions, please refer to the \`changelog.md\` file.\n\n## What's New:\n$LATEST_CHANGELOG")"
           
           echo Summary:
           echo - Mod version: $MOD_VER
           echo - Target repository: $REPO
           echo - Release name: $RELEASE_NAME
-          echo - Release body: $BODY
+          echo - Release body:
+          echo $BODY
+          echo ------
           
           response=$(curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
