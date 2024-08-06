@@ -8,7 +8,7 @@
 
 Features:
 - [x] Conditional activation
-  - [ ] Additional check for special cases (e.g. "very special update")
+  - [x] Additional check for special cases (e.g. "very special update")
 - [x] Automatic changelog appender
   - [ ] Also do the same to the release page (Could be done by extracting the mod, will definitely have to try out)
 - [x] Automatic mod version bumper
