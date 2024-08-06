@@ -17,11 +17,11 @@ class $modify(MenuLayer) {
 
         m_fields->m_listener.bind([] (web::WebTask::Event* e) {
             if (web::WebResponse* res = e->getValue()) {
+                if (res->ok()) {
 // if the request was successful 
-                log::info("raw: {}", res->string().unwrapOr("Uh oh!"));
-                auto object = matjson::parse(res->string());
-                log::info("extracted url: {}", object["url"].as_string());
-
+                    log::info("raw: {}", res->string().unwrapOr("Uh oh!"));
+                    log::info("extracted url: {}", res->json()->unwrapOr("oh no!")["url"].as_string());
+                }
             } else if (web::WebProgress* p = e->getProgress()) {
 // if the request is in progress, say how far along it is
                 log::info("progress: {}", p->downloadProgress().value_or(0.f));
