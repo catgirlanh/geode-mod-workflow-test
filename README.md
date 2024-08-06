@@ -11,6 +11,7 @@ Features:
   - [x] Additional check for special cases (e.g. "very special update")
 - [x] Automatic changelog appender
   - [ ] Also do the same to the release page (Could be done by extracting the mod, will definitely have to try out)
+  - [ ] Omit adding changelog entirely if extended commit description is left blank
 - [x] Automatic mod version bumper
   - [ ] Check to prevent the workflow from continuing upon detecting duplicate version
 - [x] Automatic release creator
