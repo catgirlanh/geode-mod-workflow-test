@@ -11,3 +11,5 @@ Features:
 - [x] Automatic release creator
   - [ ] Option to mark the release as draft instead
   - [ ] Option to mark it as pre-release
+Most importantly:
+- [ ] Make this portable, so it can be used with the Actions Marketplace
