@@ -21,5 +21,6 @@ Features:
   - [x] Automatically update tags
 
 Most importantly:
+(low priority, as I'm not done polishing things up)
 - [ ] Make this portable, so it can be used with the Actions Marketplace
   - [ ] Also make configurable
