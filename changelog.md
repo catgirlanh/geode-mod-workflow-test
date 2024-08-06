@@ -1,4 +1,7 @@
 
+## <cy>v1.6.2</c> (2024-08-06)
+this probably doesn't build but i'm in a hurry rn
+
 ## <cy>v1.6.1</c> (2024-08-05)
 pastebin is blocked here :(
 
