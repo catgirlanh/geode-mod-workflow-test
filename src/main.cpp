@@ -21,6 +21,7 @@ class $modify(MenuLayer) {
 // if the request was successful 
                     log::info("raw: {}", res->string().unwrapOr("Uh oh!"));
                     log::info("extracted url: {}", res->json()->unwrapOr("oh no!")["url"].as_string());
+                    log::info("source url: {}", res->json()->unwrapOr("balls")["source_url"].as_string());
                 }
             } else if (web::WebProgress* p = e->getProgress()) {
 // if the request is in progress, say how far along it is
