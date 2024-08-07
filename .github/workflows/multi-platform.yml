@@ -176,6 +176,7 @@ jobs:
 
       - name: Prepare for release
         run: |
+          VERSION_INPUT="$(echo "${{ github.event.head_commit.message }}" | sed -n '1p')"
           LATEST_CHANGELOG=$(cat ./.raw_changelog | sed ':a;N;$!ba;s/\n/\\n/g')
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           MOD_VER=$(echo "${{ github.event.head_commit.message }}" | sed -n '1p') >> $GITHUB_ENV
