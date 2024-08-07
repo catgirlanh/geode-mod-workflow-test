@@ -150,12 +150,14 @@ jobs:
         run: |
           MOD_FILE=$(find . -name '*.geode' -print -quit)
           echo mod file path: $MOD_FILE
-          if [ -f "$MOD_FILE" ]; then
+          MOD_JSON=$(find . -iname "mod.json" -print -quit
+          echo mod.json file path: $MOD_JSON
+          if [ -f "$(find . -name '*.geode' -print -quit)" ]; then
              echo Mod file found. Proceeding!
              unzip "$MOD_FILE"
              # being VERY SURE here
              CHANGELOG_FILE=$(find . -iname "changelog.md" -print -quit)
-          
+             PKG_VER=$(jq -r '.version' $MOD_JSON)
             awk -v version="$VERSION_INPUT" '
             /^## <cy>/ {
               if (match($0, version)) {
@@ -194,8 +196,12 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             -d "{\"tag_name\": \"$MOD_VER\", \"name\": \"$RELEASE_NAME\", \"body\": \"$BODY\", \"draft\": false, \"prerelease\": false}" \
              https://api.github.com/repos/$REPO/releases)
+          echo == RESPONSE ==
+          echo $response
 
           upload_url=$(echo $response | jq -r '.upload_url' | sed -e "s/{?name,label}//")
+          echo == UPLOAD URL ==
+          echo $upload_url
           
           for file in "Build Output"/*.geode; do
             curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
