@@ -11,17 +11,6 @@ lollll
 ## <cy>v1.7.1</c> (2024-08-07)
 pass the version over whoops
 
-## <cy></c> (2024-08-07)
-fjsdfk
-fjsdkf
-
-## <cy></c> (2024-08-07)
-so confused
-
-## <cy></c> (2024-08-07)
-fksdf
-fjisdkf
-
 ## <cy>v1.7.0</c> (2024-08-06)
 John 1 The Word Became Flesh 1In the beginning was the Word, and the Word was with God, and the Word was God. 2He was with God in the beginning. 3Through him all things were made; without him nothing was made that has been made. 4In him was life, and that life was the light of all mankind.
  5The light shines in the darkness, and the darkness has not overcome it.
