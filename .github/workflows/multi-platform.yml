@@ -154,30 +154,12 @@ jobs:
           echo mod.json file path: $MOD_JSON
           if [ -f "$(find . -name '*.geode' -print -quit)" ]; then
              echo Mod file found. Proceeding!
-             unzip "$MOD_FILE"
-             # being VERY SURE here
-             CHANGELOG_FILE=$(find . -iname "changelog.md" -print -quit)
-             PKG_VER=$(jq -r '.version' $MOD_JSON)
-            awk -v version="$VERSION_INPUT" '
-            /^## <cy>/ {
-              if (match($0, version)) {
-                uwu = 1;
-              } else if (inside) {
-                uwu = 0;
-                exit;
-              }
-            }
-            uwu { print $0; }  # Print only if we are inside the target block
-            ' "$CHANGELOG_FILE" > .raw_changelog
-          else
-             echo "No mod file! Something went wrong... :("
-             exit 1
           fi
-
       - name: Prepare for release
         run: |
           VERSION_INPUT="$(echo "${{ github.event.head_commit.message }}" | sed -n '1p')"
-          LATEST_CHANGELOG=$(cat ./.raw_changelog | sed ':a;N;$!ba;s/\n/\\n/g')
+          RAW_CHANGELOG=$(echo "${{ github.event.head_commit.message }}" | sed ':a;N;$!ba;s/\n/\\n/g')
+          LATEST_CHANGELOG=$(echo -e "$RAW_CHANGELOG" | sed '1d;2d')
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           MOD_VER=$(echo "${{ github.event.head_commit.message }}" | sed -n '1p') >> $GITHUB_ENV
           echo publishing mod ver: ${MOD_VER}
