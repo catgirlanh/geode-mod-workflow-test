@@ -21,8 +21,6 @@ jobs:
         
       - name: Initial version check
         run: |
-          git log -1 --pretty=format:'%s'
-          echo "${{ github.event.head_commit.message }}" | sed -n '1p'
           echo "VERSION_INPUT=$(echo "${{ github.event.head_commit.message }}" | sed -n '1p')" >> $GITHUB_ENV
           VERSION_INPUT="$(echo "${{ github.event.head_commit.message }}" | sed -n '1p')"
           if [[ $(git log -1 --pretty=format:'%s') =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
@@ -53,6 +51,7 @@ jobs:
       - name: Update changelog and bump version
         id: update_changelog
         run: |
+          VERSION_INPUT="$(echo "${{ github.event.head_commit.message }}" | sed -n '1p')"
           RAW_CHANGELOG=$(echo "${{ github.event.head_commit.message }}" | sed ':a;N;$!ba;s/\n/\\n/g')
           echo "$RAW_CHANGELOG"
           CHANGELOG=$(echo -e "$RAW_CHANGELOG" | sed '1d;2d')
