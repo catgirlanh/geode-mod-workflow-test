@@ -24,6 +24,7 @@ jobs:
           git log -1 --pretty=format:'%s'
           echo "${{ github.event.head_commit.message }}" | sed -n '1p'
           echo "VERSION_INPUT=$(echo "${{ github.event.head_commit.message }}" | sed -n '1p')" >> $GITHUB_ENV
+          echo "VERSION_INPUT=$(echo "${{ github.event.head_commit.message }}" | sed -n '1p')"
           if [[ $(git log -1 --pretty=format:'%s') =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Version $VERSION_INPUT is valid."
           else
