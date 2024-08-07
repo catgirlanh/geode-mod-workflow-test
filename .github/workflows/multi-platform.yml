@@ -150,7 +150,7 @@ jobs:
         run: |
           MOD_FILE=$(find . -name '*.geode' -print -quit)
           echo mod file path: $MOD_FILE
-          MOD_JSON=$(find . -iname "mod.json" -print -quit
+          MOD_JSON=$(find . -iname "mod.json" -print -quit)
           echo mod.json file path: $MOD_JSON
           if [ -f "$(find . -name '*.geode' -print -quit)" ]; then
              echo Mod file found. Proceeding!
