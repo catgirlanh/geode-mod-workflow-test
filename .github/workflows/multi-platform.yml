@@ -152,11 +152,10 @@ jobs:
           echo mod file path: $MOD_FILE
           if [ -f "$MOD_FILE" ]; then
              echo Mod file found. Proceeding!
-             unzip $MOD_FILE
+             unzip "$MOD_FILE"
              # being VERY SURE here
              CHANGELOG_FILE=$(find . -iname "changelog.md" -print -quit)
           
-            # Extract changelog entries using awk
             awk -v version="$VERSION_INPUT" '
             /^## <cy>/ {
               if (match($0, version)) {
