@@ -1,4 +1,7 @@
 
+## <cy>v1.7.8</c> (2024-08-07)
+there's a better way to do this
+
 ## <cy>v1.7.7</c> (2024-08-07)
 fix version oversight
 
