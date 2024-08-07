@@ -1,4 +1,7 @@
 
+## <cy>v1.7.7</c> (2024-08-07)
+fix version oversight
+
 ## <cy>v1.7.6</c> (2024-08-07)
 i looove gd cologne
 
