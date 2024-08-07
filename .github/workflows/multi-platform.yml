@@ -148,7 +148,6 @@ jobs:
       
       - name: Misc. actions
         run: |
-          cd "Build Output/"
           MOD_FILE=$(find . -name '*.geode' -print -quit)
           echo mod file path: $MOD_FILE
           if [ -f "$MOD_FILE" ]; then
