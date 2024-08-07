@@ -168,7 +168,7 @@ jobs:
               }
             }
             uwu { print $0; }  # Print only if we are inside the target block
-            ' "$CHANGELOG_FILE" > $RAW_LATEST_CHANGELOG
+            ' "$CHANGELOG_FILE" > .raw_changelog
           else
              echo "No mod file! Something went wrong... :("
              exit 1
@@ -176,7 +176,7 @@ jobs:
 
       - name: Prepare for release
         run: |
-          LATEST_CHANGELOG=$(echo "$RAW_LATEST_CHANGELOG" | sed ':a;N;$!ba;s/\n/\\n/g')
+          LATEST_CHANGELOG=$(cat ./.raw_changelog | sed ':a;N;$!ba;s/\n/\\n/g')
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           MOD_VER=$(echo "${{ github.event.head_commit.message }}" | sed -n '1p') >> $GITHUB_ENV
           echo publishing mod ver: ${MOD_VER}
