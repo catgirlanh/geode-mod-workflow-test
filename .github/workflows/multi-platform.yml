@@ -24,7 +24,7 @@ jobs:
           git log -1 --pretty=format:'%s'
           echo "${{ github.event.head_commit.message }}" | sed -n '1p'
           echo "VERSION_INPUT=$(echo "${{ github.event.head_commit.message }}" | sed -n '1p')" >> $GITHUB_ENV
-          echo "VERSION_INPUT=$(echo "${{ github.event.head_commit.message }}" | sed -n '1p')"
+          VERSION_INPUT="$(echo "${{ github.event.head_commit.message }}" | sed -n '1p')"
           if [[ $(git log -1 --pretty=format:'%s') =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Version $VERSION_INPUT is valid."
           else
@@ -34,7 +34,7 @@ jobs:
 
       - name: Secondary version check
         run: |
-          if "$(git tag)" | grep -q "$VERSION_INPUT"; then
+          if "$(git tag | sed ':a;N;$!ba;s/\n/\\n/g')" | grep -q "$VERSION_INPUT"; then
             echo "The version you're trying to release ($VERSION_INPUT) already have existed! Make sure you know what you're doing!"
             exit 1
           else
