@@ -188,26 +188,15 @@ jobs:
           echo $response
 
           upload_url=$(echo $response | jq -r '.upload_url' | sed -e "s/{?name,label}//")
-          assets_url=$(echo $response | jq -r '.assets_url')
-          assets_response=$(curl -X GET $assets_url)
-          download_url=$(echo $assets_response | jq -r '.browser_download_url')
-          
           echo == UPLOAD URL ==
           echo $upload_url
-
-          echo == RELEASE DOWNLOAD URL ==
-          echo $download_url
-
+          
           for file in "Build Output"/*.geode; do
             curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
               -H "Content-Type: application/octet-stream" \
               --data-binary @"$file" \
               "$upload_url?name=$(basename "$file")"
           done
-          
-          geode index login --token $GITHUB_TOKEN
-          geode index mods update $download_url
-          
           
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
