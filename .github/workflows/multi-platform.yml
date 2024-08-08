@@ -198,7 +198,7 @@ jobs:
               "$upload_url?name=$(basename "$file")"
           done
 
-          download_url=$(curl -X GET 'https://api.github.com/repos/$REPO/releases' | jq -r '.[0].assets.[0].browser_download_url')
+          download_url=$(curl -s -X GET 'https://api.github.com/repos/$REPO/releases' | jq -r '.[0].assets.[0].browser_download_url')
           echo == DOWNLOAD URL ==
           echo $download_url
 
