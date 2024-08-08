@@ -170,7 +170,7 @@ jobs:
           echo publishing mod ver: ${MOD_VER}
           REPO=${{ github.repository }}
           RELEASE_NAME="Release ${MOD_VER}"
-          BODY="$(echo -e "This is an automated release. For the full changelogs of current and past versions, please refer to the \`changelog.md\` file.\n\n## What's New:\n$LATEST_CHANGELOG")"
+          BODY="$(echo "This is an automated release. For the full changelogs of current and past versions, please refer to the \`changelog.md\` file.<br><br>## What's New:<br>$LATEST_CHANGELOG")"
           
           echo Summary:
           echo - Mod version: $MOD_VER
