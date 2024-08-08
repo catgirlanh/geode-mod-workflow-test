@@ -1,4 +1,7 @@
 
+## <cy>v1.7.10</c> (2024-08-08)
+hay lắm, hay lắm cơ nhỉ?!
+
 ## <cy>v1.7.9</c> (2024-08-08)
 fix fiofskdjfs
 
