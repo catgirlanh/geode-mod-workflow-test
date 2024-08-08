@@ -171,7 +171,7 @@ jobs:
           REPO=${{ github.repository }}
           RELEASE_NAME="Release ${MOD_VER}"
           BODY=$(echo "<strong>This is an automated release. For the full changelogs of current and past versions, please refer to the \`changelog.md\` file.</strong><h2>What's New:</h2>$LATEST_CHANGELOG" | sed ':a;N;$!ba;s/\n/<br>/g')
-          uwu=$(echo "|${COMMAND//[$'\t\r\n']}|")
+          uwu=$(echo "${BODY//[$'\t\r\n']}")
           echo Summary:
           echo - Mod version: $MOD_VER
           echo - Target repository: $REPO
