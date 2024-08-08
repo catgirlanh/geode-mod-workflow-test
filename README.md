@@ -6,7 +6,7 @@
 > [!IMPORTANT]
 > This workflow currently is in beta and is being extensively tested and worked on. Use this at your own risk.
 
-Features:
+## Features
 - [x] Conditional activation
   - [x] Additional check for special cases (e.g. "very special update")
 - [x] Automatic changelog appender
@@ -19,6 +19,9 @@ Features:
   - [ ] Option to mark it as pre-release
   - [x] Automatically update tags
 
+## Known Bugs
+### When a line is checked, it means the bug has been fixed.
+- [ ] There is currently no way to continue anyway when a single platform build fails
 Most importantly:
 (low priority, as I'm not done polishing things up)
 - [ ] Make this portable, so it can be used with the Actions Marketplace
