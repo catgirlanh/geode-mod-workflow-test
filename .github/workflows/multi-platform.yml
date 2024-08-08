@@ -89,7 +89,7 @@ jobs:
   build:
     needs: ['magic-touches']
     strategy:
-      fail-fast: true  # for my use case (I expect my mod to work on all platforms)
+      fail-fast: false # nevermind
       matrix:
         config:
         - name: Windows
