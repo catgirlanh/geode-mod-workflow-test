@@ -195,9 +195,9 @@ jobs:
           echo == UPLOAD URL ==
           echo $upload_url
 
-          echo == RELEASE UPLOAD URL ==
+          echo == RELEASE DOWNLOAD URL ==
           echo $download_url
-          
+
           for file in "Build Output"/*.geode; do
             curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
               -H "Content-Type: application/octet-stream" \
