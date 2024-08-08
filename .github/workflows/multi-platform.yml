@@ -170,8 +170,10 @@ jobs:
           echo publishing mod ver: ${MOD_VER}
           REPO=${{ github.repository }}
           RELEASE_NAME="Release ${MOD_VER}"
-          BODY="$(echo "<strong>This is an automated release. For the full changelogs of current and past versions, please refer to the \`changelog.md\` file.</strong><h2>What's New:</h2>$LATEST_CHANGELOG")"
-          
+          BODY=$(cat <<'EOF' | sed ':a;N;$!ba;s/\n/\\n/g'
+          $(echo "<strong>This is an automated release. For the full changelogs of current and past versions, please refer to the \`changelog.md\` file.</strong><h2>What's New:</h2>$LATEST_CHANGELOG")
+          EOF
+          )
           echo Summary:
           echo - Mod version: $MOD_VER
           echo - Target repository: $REPO
