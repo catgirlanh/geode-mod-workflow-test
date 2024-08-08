@@ -171,17 +171,18 @@ jobs:
           REPO=${{ github.repository }}
           RELEASE_NAME="Release ${MOD_VER}"
           BODY=$(echo "<strong>This is an automated release. For the full changelogs of current and past versions, please refer to the \`changelog.md\` file.</strong><h2>What's New:</h2>$LATEST_CHANGELOG" | sed ':a;N;$!ba;s/\n/<br>/g')
+          uwu=$(echo "|${COMMAND//[$'\t\r\n']}|")
           echo Summary:
           echo - Mod version: $MOD_VER
           echo - Target repository: $REPO
           echo - Release name: $RELEASE_NAME
           echo - Release body:
-          echo $BODY
+          echo $uwu
           echo ------
           
           response=$(curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
-            -d "{\"tag_name\": \"$MOD_VER\", \"name\": \"$RELEASE_NAME\", \"body\": \"$BODY\", \"draft\": false, \"prerelease\": false}" \
+            -d "{\"tag_name\": \"$MOD_VER\", \"name\": \"$RELEASE_NAME\", \"body\": \"$uwu\", \"draft\": false, \"prerelease\": false}" \
              https://api.github.com/repos/$REPO/releases)
           echo == RESPONSE ==
           echo $response
