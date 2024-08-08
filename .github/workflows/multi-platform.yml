@@ -161,7 +161,7 @@ jobs:
           echo raw changelog:
           echo $RAW_CHANGELOG
           echo ----
-          LATEST_CHANGELOG=$(echo "$RAW_CHANGELOG" | sed ':a;N;$!ba;s/\n/<br>/g')
+          LATEST_CHANGELOG=$(echo "$RAW_CHANGELOG" | awk '{printf "%s<br>", $0; next} END {printf ""}')
           echo latest changelog:
           echo $LATEST_CHANGELOG
           echo ----
