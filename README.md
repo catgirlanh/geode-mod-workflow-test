@@ -22,7 +22,8 @@
 ## Known Bugs
 ### When a line is checked, it means the bug has been fixed.
 - [ ] There is currently no way to continue anyway when a single platform build fails
-Most importantly:
-(low priority, as I'm not done polishing things up)
+
+## Misc.
+### (low priority, as I'm not done polishing things up)
 - [ ] Make this portable, so it can be used with the Actions Marketplace
   - [ ] Also make configurable
