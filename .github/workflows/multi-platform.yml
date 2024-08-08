@@ -191,17 +191,17 @@ jobs:
           echo == UPLOAD URL ==
           echo $upload_url
           
-          download_url=$(curl -X GET https://api.github.com/repos/$REPO/releases | jq -r '.[0].assets.[0].browser_download_url')
-          echo == DOWNLOAD URL ==
-          echo $download_url
-
           for file in "Build Output"/*.geode; do
             curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
               -H "Content-Type: application/octet-stream" \
               --data-binary @"$file" \
               "$upload_url?name=$(basename "$file")"
           done
-          
+
+          download_url=$(curl -X GET 'https://api.github.com/repos/$REPO/releases' | jq -r '.[0].assets.[0].browser_download_url')
+          echo == DOWNLOAD URL ==
+          echo $download_url
+
           geode index login --token $GITHUB_TOKEN
           geode index mods update $download_url
         env:
