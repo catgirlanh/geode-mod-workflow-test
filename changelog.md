@@ -1,4 +1,9 @@
 
+## <cy>v1.7.13</c> (2024-08-08)
+- put on my thigh highs
+- realized i shouldn't be a furry
+- catgirls are cute
+
 ## <cy>v1.7.12</c> (2024-08-08)
 no longer use backslash n
 
