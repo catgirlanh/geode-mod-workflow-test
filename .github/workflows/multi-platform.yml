@@ -164,7 +164,7 @@ jobs:
           LATEST_CHANGELOG=$(echo "$RAW_CHANGELOG" | perl -pe 's/\n/<br>/g')
           if -z ["$LATEST_CHANGELOG"]; then
             echo Hmmm, apparently no changelog has been provided. Using an alternate body for that then!
-            BODY=$(echo "<strong>This is an automated release. For the full changelogs of current and past versions, please refer to the \`changelog.md\` file.</strong><br><br><em>No changelog provided.</em>)
+            BODY=$(echo "<strong>This is an automated release. For the full changelogs of current and past versions, please refer to the \`changelog.md\` file.</strong><br><br><em>No changelog provided.</em>")
           else
             echo latest changelog:
             echo $LATEST_CHANGELOG
