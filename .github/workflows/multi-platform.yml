@@ -213,10 +213,11 @@ jobs:
           echo == DOWNLOAD URL ==
           echo $download_url
 
-          geode index login --token $GITHUB_TOKEN
+          geode index login --token $PERSONAL_ACCESS_TOKEN
           geode index mods update $download_url
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
             
       - name: Delete mod file
         uses: geekyeggo/delete-artifact@v5
