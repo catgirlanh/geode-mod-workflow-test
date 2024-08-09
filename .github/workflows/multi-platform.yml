@@ -197,6 +197,10 @@ jobs:
           upload_url=$(echo $response | jq -r '.upload_url' | sed -e "s/{?name,label}//")
           echo == UPLOAD URL ==
           echo $upload_url
+
+          assets_url=$(echo $response | jq -r '.assets_url')
+          echo == ASSETS URL ==
+          echo $assets_url
           
           for file in "Build Output"/*.geode; do
             curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
@@ -205,7 +209,7 @@ jobs:
               "$upload_url?name=$(basename "$file")"
           done
 
-          download_url=$(curl -s -X GET 'https://api.github.com/repos/$REPO/releases' | jq -r '.[0].assets[0].browser_download_url')
+          download_url=$(curl -s -X GET "$assets_url" | jq -r '.[0].browser_download_url')
           echo == DOWNLOAD URL ==
           echo $download_url
 
