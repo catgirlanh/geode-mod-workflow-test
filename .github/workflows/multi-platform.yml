@@ -210,6 +210,7 @@ jobs:
           done
 
           download_url=$(curl -s -X GET "$assets_url" | jq -r '.[0].browser_download_url')
+          echo ""
           echo == DOWNLOAD URL ==
           echo $download_url
 
