@@ -126,6 +126,7 @@ jobs:
           bindings-ref: main
           combine: true
           target: ${{ matrix.config.target }}
+          
   build-ios:
     name: Build for iOS
     runs-on: macos-latest
@@ -144,6 +145,8 @@ jobs:
         with:
           bindings: geode-catgirls/bindings
           target: iOS
+          gh-pat: ${{ secrets.GH_PAT }}
+          # super secret
           
   package:
     name: Package and release mod
