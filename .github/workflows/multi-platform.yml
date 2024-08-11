@@ -105,10 +105,6 @@ jobs:
         - name: Android64
           os: ubuntu-latest
           target: Android64
-          
-        - name: iOS
-          os: macos-latest
-          target: iOS
 
     name: Build (${{ matrix.config.name }})
     runs-on: ${{ matrix.config.os }}
@@ -130,7 +126,25 @@ jobs:
           bindings-ref: main
           combine: true
           target: ${{ matrix.config.target }}
-        
+  build-ios:
+    name: Build for iOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Catch up
+        # see https://github.com/actions/checkout/issues/439
+        run: git pull origin main --no-rebase
+
+      - name: Build SPECIFICALLY for iOS which is just ridiculous
+        uses: geode-catgirls/build-geode-mod@main
+        with:
+          bindings: geode-catgirls/bindings
+          target: iOS
+          
   package:
     name: Package and release mod
     runs-on: ubuntu-latest
