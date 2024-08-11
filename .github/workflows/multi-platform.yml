@@ -32,7 +32,7 @@ jobs:
 
       - name: Secondary version check
         run: |
-          if "echo $(git tag | sed ':a;N;$!ba;s/\n/\\n/g')" | grep -q "$VERSION_INPUT"; then
+          if "'echo $(git tag | sed ':a;N;$!ba;s/\n/\\n/g')'" | grep -q "$VERSION_INPUT"; then
             echo "The version you're trying to release ($VERSION_INPUT) already have existed! Make sure you know what you're doing!"
             exit 1
           else
@@ -105,6 +105,10 @@ jobs:
         - name: Android64
           os: ubuntu-latest
           target: Android64
+          
+        - name: iOS
+          os: macos-latest
+          target: iOS
 
     name: Build (${{ matrix.config.name }})
     runs-on: ${{ matrix.config.os }}
