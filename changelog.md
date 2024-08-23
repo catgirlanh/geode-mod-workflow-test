@@ -1,4 +1,7 @@
 
+## <cy>v2.1.1</c> (2024-08-23)
+cuddled someone?
+
 ## <cy>v2.1.0</c> (2024-08-23)
 that wasn't really my fault but whatever...
 
