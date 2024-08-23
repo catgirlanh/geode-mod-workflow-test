@@ -8,7 +8,7 @@
 > - Your mod **must have been on the index beforehand** for the automatic updating to work.
 
 > [!IMPORTANT]
-> A personal access token (PAT) is **required** to automatically publish your mod to the Geode index. See [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) on how to create your PATs, and [here](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions) on how to set the repository secret. For the full instructions, see [the setup guide](https://github.com/catgirlanh/geode-mod-workflow-test/wiki/Setup-Guide).
+> A Geode index token is required for automatically uploading the updated mod to the Geode index.
 
 ## Features
 - [x] Conditional activation
