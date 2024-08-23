@@ -1,4 +1,7 @@
 
+## <cy>v2.0.0</c> (2024-08-23)
+Update sample code
+
 ## <cy>v1.7.34</c> (2024-08-11)
 eye ohh yes!!
 
