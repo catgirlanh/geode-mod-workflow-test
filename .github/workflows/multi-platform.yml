@@ -155,7 +155,7 @@ jobs:
     needs: ['build-ios']
 
     steps:
-      - uses: geode-sdk/build-geode-mod/combine@main
+      - uses: geode-catgirls/build-geode-mod/combine@main
         id: build
         name: Combine mods
 
@@ -236,11 +236,11 @@ jobs:
           echo == DOWNLOAD URL ==
           echo $download_url
 
-          geode index login --token $PERSONAL_ACCESS_TOKEN
-          geode index mods update $download_url
+          # geode index login --token $PERSONAL_ACCESS_TOKEN
+          # geode index mods update $download_url
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          INDEX_TOKEN: ${{ secrets.GEODE_INDEX_TOKEN }}
             
       - name: Delete mod file
         uses: geekyeggo/delete-artifact@v5
