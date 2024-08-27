@@ -118,7 +118,7 @@ jobs:
       
       - name: Catch up
         # see https://github.com/actions/checkout/issues/439
-        run: git pull origin main --no-rebase
+        run: git pull origin ${{ github.ref }} --no-rebase
 
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
@@ -140,7 +140,7 @@ jobs:
       
       - name: Catch up
         # see https://github.com/actions/checkout/issues/439
-        run: git pull origin main --no-rebase
+        run: git pull origin ${{ github.ref }} --no-rebase
 
       - name: Build SPECIFICALLY for iOS which is just ridiculous
         uses: geode-catgirls/build-geode-mod@main
