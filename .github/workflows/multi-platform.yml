@@ -52,6 +52,7 @@ jobs:
       - name: Update changelog and bump version
         id: update_changelog
         run: |
+          touch changelog.md
           VERSION_INPUT="$(echo "${{ github.event.head_commit.message }}" | sed -n '1p')"
           echo "VERSION_INPUT=$(echo "${{ github.event.head_commit.message }}" | sed -n '1p')" >> $GITHUB_ENV
           RAW_CHANGELOG=$(echo "${{ github.event.head_commit.message }}" | sed ':a;N;$!ba;s/\n/\\n/g')
