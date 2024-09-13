@@ -28,7 +28,7 @@
 ### When a line is checked, it means the bug has been fixed.
 - [ ] There is currently no way to continue anyway when a single platform build fails
 - [x] Secondary version check is broken and always returns "pass"
-- [ ] Workflow fails when there's no changelog.md file present
+- [x] Workflow fails when there's no changelog.md file present
 
 ## Misc.
 ### (low priority, as I'm not done polishing things up)
