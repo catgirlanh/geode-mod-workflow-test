@@ -33,7 +33,7 @@ jobs:
       - name: Secondary version check
         run: |
           # help needed fixing
-          if "'echo $(git tag | sed ':a;N;$!ba;s/\n/\\n/g')'" | grep -q "$VERSION_INPUT"; then
+          if "'echo -e $(git tag | sed ':a;N;$!ba;s/\n/\\n/g')'" | grep -q "$VERSION_INPUT"; then
             echo "The version you're trying to release ($VERSION_INPUT) already have existed! Make sure you know what you're doing!"
             exit 1
           else
